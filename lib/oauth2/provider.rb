@@ -36,6 +36,7 @@ module OAuth2
     def self.activate
       case backend
         when :mongoid then OAuth2::Provider::Models::Mongoid.activate
+        when :datamapper then OAuth2::Provider::Models::DataMapper.activate
         else OAuth2::Provider::Models::ActiveRecord.activate
       end
     end
