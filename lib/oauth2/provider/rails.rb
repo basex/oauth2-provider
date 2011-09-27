@@ -7,9 +7,10 @@ module OAuth2::Provider::Rails
     config.oauth2_provider = ActiveSupport::OrderedOptions.new
     config.oauth2_provider.activerecord = ActiveSupport::OrderedOptions.new
     config.oauth2_provider.mongoid = ActiveSupport::OrderedOptions.new
-
+    config.oauth2_provider.datamapper = ActiveSupport::OrderedOptions.new#or data_mapper    
+ 
     initializer "oauth2_provider.config" do |app|
-      app.config.oauth2_provider.except(:activerecord, :mongoid).each do |k,v|
+      app.config.oauth2_provider.except(:activerecord, :mongoid, :datamapper).each do |k,v|#or data_mapper
         OAuth2::Provider.send "#{k}=", v
       end
 
@@ -19,6 +20,10 @@ module OAuth2::Provider::Rails
 
       app.config.oauth2_provider.mongoid.each do |k, v|
         OAuth2::Provider::Models::Mongoid.send "#{k}=", v
+      end
+
+      app.config.oauth2_provider.datamapper.each do |k, v| #or data_mapper
+        OAuth2::Provider::Models::DataMapper.send "#{k}=", v
       end
 
       OAuth2::Provider.activate

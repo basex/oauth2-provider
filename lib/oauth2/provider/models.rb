@@ -1,7 +1,7 @@
 module OAuth2::Provider::Models
-  autoload :ActiveRecord, 'oauth2/provider/models/active_record'
-  autoload :Mongoid, 'oauth2/provider/models/mongoid'
-  autoload :DataMapper, 'oauth2/provider/models/datamapper'
+  autoload :ActiveRecord, 'oauth2/provider/models/orm/active_record'
+  autoload :Mongoid, 'oauth2/provider/models/orm/mongoid'
+  autoload :DataMapper, 'oauth2/provider/models/orm/datamapper'
 
   autoload :Authorization, 'oauth2/provider/models/authorization'
   autoload :AccessToken, 'oauth2/provider/models/access_token'
